@@ -224,13 +224,13 @@ public final class ECDHECryptography {
 	 */
 	public static ECPoint decodePoint(byte[] encoded, EllipticCurve curve) {
 		if ((encoded.length == 0) || (encoded[0] != 0x04)) {
-			LOGGER.severe("Only uncompressed point format supported.");
+			LOGGER.finest("Only uncompressed point format supported.");
 			return null;
 		}
 		
 		int fieldSize = (curve.getField().getFieldSize() + 7) / 8;
 		if (encoded.length != (fieldSize * 2) + 1) {
-			LOGGER.severe("Point does not match field size.");
+			LOGGER.finest("Point does not match field size.");
 			return null;
 		}
 		byte[] xb = new byte[fieldSize];
@@ -259,7 +259,7 @@ public final class ECDHECryptography {
 		byte[] yb = ByteArrayUtils.trimZeroes(point.getAffineY().toByteArray());
 		
 		if ((xb.length > fieldSize) || (yb.length > fieldSize)) {
-			LOGGER.severe("Point coordinates do not match field size.");
+			LOGGER.finest("Point coordinates do not match field size.");
 			return null;
 		}
 		

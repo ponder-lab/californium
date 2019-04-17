@@ -39,7 +39,7 @@ public class TcpAdaptionLayer extends AbstractLayer {
 			lower().sendEmptyMessage(exchange, message);
 		} else {
 			// Empty messages don't make sense when running over TCP connector.
-			LOGGER.log(Level.WARNING, "Attempting to send empty message (ACK/RST) in TCP mode {0}", message);
+			LOGGER.log(Level.FINEST, "Attempting to send empty message (ACK/RST) in TCP mode {0}", message);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class TcpAdaptionLayer extends AbstractLayer {
 	@Override
 	public void receiveEmptyMessage(Exchange exchange, EmptyMessage message) {
 		// Empty messages are ignored when running over TCP connector.
-		LOGGER.log(Level.INFO, "Received empty message in TCP mode {0}", message);
+		LOGGER.log(Level.FINEST, "Received empty message in TCP mode {0}", message);
 	}
 
 }

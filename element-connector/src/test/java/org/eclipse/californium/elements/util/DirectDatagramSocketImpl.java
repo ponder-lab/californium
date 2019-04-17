@@ -138,7 +138,7 @@ public class DirectDatagramSocketImpl extends AbstractDatagramSocketImpl {
 
 	@Override
 	protected void bind(int lport, InetAddress laddr) throws SocketException {
-		LOGGER.log(Level.FINE, "binding to port {0}, address {1}", new Object[] { lport, laddr });
+		LOGGER.log(Level.FINEST, "binding to port {0}, address {1}", new Object[] { lport, laddr });
 		int port = bind(lport);
 		synchronized (this) {
 			this.localPort = port;
@@ -158,10 +158,10 @@ public class DirectDatagramSocketImpl extends AbstractDatagramSocketImpl {
 			addr = this.localAddress;
 			this.closed = true;
 		}
-		LOGGER.log(Level.FINE, "closing port {0}, address {1}", new Object[] { port, addr });
+		LOGGER.log(Level.FINEST, "closing port {0}, address {1}", new Object[] { port, addr });
 		if (!isClosed) {
 			if (!map.remove(port, this)) {
-				LOGGER.log(Level.INFO, "cannot close unknown port {0}, address {1}", new Object[] { port, addr });
+				LOGGER.log(Level.FINEST, "cannot close unknown port {0}, address {1}", new Object[] { port, addr });
 			}
 		}
 	}
@@ -192,7 +192,7 @@ public class DirectDatagramSocketImpl extends AbstractDatagramSocketImpl {
 			}
 		} catch (InterruptedException exception) {
 			if (!incomingQueue.isEmpty()) {
-				LOGGER.log(Level.WARNING, "interrupted while receiving!");
+				LOGGER.log(Level.SEVERE, "interrupted while receiving!");
 			}
 			throw new InterruptedIOException(addr + ":" + port);
 		}
@@ -215,12 +215,12 @@ public class DirectDatagramSocketImpl extends AbstractDatagramSocketImpl {
 		byte[] destPacketData = destPacket.getData();
 		if (destPacketLength < receivedLength) {
 			if (destPacketData.length > destPacketLength) {
-				LOGGER.log(Level.FINE, "increasing receive buffer from {0} to full buffer capacity [{1}]",
+				LOGGER.log(Level.SEVERE, "increasing receive buffer from {0} to full buffer capacity [{1}]",
 						new Object[] { destPacketLength, destPacketData.length });
 				destPacketLength = destPacketData.length;
 			}
 			if (destPacketLength < receivedLength) {
-				LOGGER.log(Level.FINE, "truncating data [length: {0}] to fit into receive buffer [size: {1}]",
+				LOGGER.log(Level.SEVERE, "truncating data [length: {0}] to fit into receive buffer [size: {1}]",
 						new Object[] { receivedLength, destPacketLength });
 				receivedLength = destPacketLength;
 			}
@@ -378,7 +378,7 @@ public class DirectDatagramSocketImpl extends AbstractDatagramSocketImpl {
 					throw new SocketException("No left free port!");
 				}
 			}
-			LOGGER.log(Level.FINE, "assigned port {0}", port);
+			LOGGER.log(Level.FINEST, "assigned port {0}", port);
 			return port;
 		} else {
 			if (null != map.putIfAbsent(lport, this)) {
@@ -436,7 +436,7 @@ public class DirectDatagramSocketImpl extends AbstractDatagramSocketImpl {
 				LOGGER.log(Level.SEVERE, "DatagramSocketImplFactory", ex);
 			}
 		} else if (factory != init.get()) {
-			LOGGER.log(Level.WARNING, "DatagramSocketImplFactory already set to {0}", init.get().getClass());
+			LOGGER.log(Level.FINEST, "DatagramSocketImplFactory already set to {0}", init.get().getClass());
 		}
 		return false;
 	}

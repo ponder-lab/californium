@@ -80,7 +80,7 @@ public class ExampleDTLSClient {
 				
 				@Override
 				public void receiveData(RawData raw) {
-					LOG.log(Level.INFO, "Received response: {0}", new String(raw.getBytes()));
+					LOG.log(Level.SEVERE, "Received response: {0}", new String(raw.getBytes()));
 					latch.countDown();
 					dtlsConnector.destroy();
 				}

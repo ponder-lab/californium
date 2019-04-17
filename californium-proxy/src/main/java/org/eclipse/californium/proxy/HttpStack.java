@@ -165,7 +165,7 @@ public class HttpStack {
 
 		// retrieve the request linked to the response
 		// if (Bench_Help.DO_LOG)
-		LOGGER.fine("Handling response for request: " + request);
+		LOGGER.finer("Handling response for request: " + request);
 
 		// fill the exchanger with the incoming response
 		Exchanger<Response> exchanger = exchangeMap.get(request);
@@ -181,7 +181,7 @@ public class HttpStack {
 				return;
 			}
 		} else {
-			LOGGER.warning("exchanger was null for request " + request + " with hash " + request.hashCode());
+			LOGGER.finer("exchanger was null for request " + request + " with hash " + request.hashCode());
 		}
 	}
 
@@ -256,7 +256,7 @@ public class HttpStack {
 
 			// if the map does not contain the key, send an error response
 			if (exchanger == null) {
-				LOGGER.warning("exchanger == null");
+				LOGGER.finer("exchanger == null");
 				sendSimpleHttpResponse(httpExchange, HttpStatus.SC_INTERNAL_SERVER_ERROR);
 				return;
 			}
@@ -287,7 +287,7 @@ public class HttpStack {
 			}
 
 			if (coapResponse == null) {
-				LOGGER.warning("No coap response");
+				LOGGER.finer("No coap response");
 				sendSimpleHttpResponse(httpExchange, HttpTranslator.STATUS_NOT_FOUND);
 				return;
 			}
@@ -351,7 +351,7 @@ public class HttpStack {
 				// Create server-side I/O reactor
 				ioReactor = new DefaultListeningIOReactor();
 				// Listen of the given port
-				LOGGER.info("HttpStack listening on port " + httpPort);
+				LOGGER.finer("HttpStack listening on port " + httpPort);
 				ioReactor.listen(new InetSocketAddress(httpPort));
 
 				// create the listener thread
@@ -362,20 +362,20 @@ public class HttpStack {
 						// Starts the reactor and initiates the dispatch of I/O
 						// event notifications to the given IOEventDispatch.
 						try {
-							LOGGER.info("Submitted http listening to thread 'HttpStack listener'");
+							LOGGER.finest("Submitted http listening to thread 'HttpStack listener'");
 
 							ioReactor.execute(ioEventDispatch);
 						} catch (IOException e) {
 							LOGGER.severe("I/O Exception in HttpStack: " + e.getMessage());
 						}
 
-						LOGGER.info("Shutdown HttpStack");
+						LOGGER.finest("Shutdown HttpStack");
 					}
 				};
 
 				listener.setDaemon(false);
 				listener.start();
-				LOGGER.info("HttpStack started");
+				LOGGER.finer("HttpStack started");
 			} catch (IOException e) {
 				LOGGER.severe("I/O error: " + e.getMessage());
 			}
@@ -442,7 +442,7 @@ public class HttpStack {
 			public void handle(HttpRequest httpRequest, HttpAsyncExchange httpExchange, HttpContext httpContext)
 					throws HttpException, IOException {
 
-				LOGGER.finer("Incoming http request: " + httpRequest.getRequestLine());
+				LOGGER.warning("Incoming http request: " + httpRequest.getRequestLine());
 
 				try {
 					// translate the request in a valid coap request
@@ -451,7 +451,7 @@ public class HttpStack {
 					// fill the maps
 					exchangeMap.put(coapRequest, new Exchanger<Response>());
 
-					LOGGER.finer("Fill exchange with: " + coapRequest + " with hash=" + coapRequest.hashCode());
+					LOGGER.warning("Fill exchange with: " + coapRequest + " with hash=" + coapRequest.hashCode());
 
 					// We create two threads
 					// The responseWorker will be in charge of producing a CoapResponse (producer)
@@ -464,7 +464,7 @@ public class HttpStack {
 					requestWorker.start();
 					responseWorker.start();
 
-					LOGGER.finer("Started thread 'httpStack worker' to wait the response");
+					LOGGER.warning("Started thread 'httpStack worker' to wait the response");
 
 				} catch (InvalidMethodException e) {
 					LOGGER.warning("Method not implemented" + e.getMessage());

@@ -43,11 +43,11 @@ public class ProxyCoapClientResource extends ForwardingResource {
 
 	@Override
 	public Response forwardRequest(Request incomingRequest) {
-		LOGGER.info("ProxyCoapClientResource forwards " + incomingRequest);
+		LOGGER.severe("ProxyCoapClientResource forwards " + incomingRequest);
 
 		// check the invariant: the request must have the proxy-uri set
 		if (!incomingRequest.getOptions().hasProxyUri()) {
-			LOGGER.warning("Proxy-uri option not set.");
+			LOGGER.severe("Proxy-uri option not set.");
 			return new Response(ResponseCode.BAD_OPTION);
 		}
 
@@ -58,14 +58,14 @@ public class ProxyCoapClientResource extends ForwardingResource {
 			outgoingRequest = CoapTranslator.getRequest(incomingRequest);
 
 			// execute the request
-			LOGGER.finer("Sending proxied CoAP request.");
+			LOGGER.severe("Sending proxied CoAP request.");
 			outgoingRequest.send();
 			
 		} catch (TranslationException e) {
-			LOGGER.warning("Proxy-uri option malformed: " + e.getMessage());
+			LOGGER.severe("Proxy-uri option malformed: " + e.getMessage());
 			return new Response(CoapTranslator.STATUS_FIELD_MALFORMED);
 		} catch (Exception e) {
-			LOGGER.warning("Failed to execute request: " + e.getMessage());
+			LOGGER.severe("Failed to execute request: " + e.getMessage());
 			return new Response(ResponseCode.INTERNAL_SERVER_ERROR);
 		}
 
@@ -74,14 +74,14 @@ public class ProxyCoapClientResource extends ForwardingResource {
 			Response incomingResponse = outgoingRequest.waitForResponse(timeout);
 
 			if (incomingResponse != null) {
-				LOGGER.info("ProxyCoapClientResource received " + incomingResponse);
+				LOGGER.severe("ProxyCoapClientResource received " + incomingResponse);
 				return CoapTranslator.getResponse(incomingResponse);
 			} else {
-				LOGGER.warning("No response received.");
+				LOGGER.severe("No response received.");
 				return new Response(CoapTranslator.STATUS_TIMEOUT);
 			}
 		} catch (InterruptedException e) {
-			LOGGER.warning("Receiving of response interrupted: " + e.getMessage());
+			LOGGER.severe("Receiving of response interrupted: " + e.getMessage());
 			return new Response(ResponseCode.INTERNAL_SERVER_ERROR);
 		}
 	}

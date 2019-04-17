@@ -182,33 +182,33 @@ public abstract class AbstractLayer implements Layer {
 
 		@Override
 		public void sendRequest(final Exchange exchange, final Request request) {
-			LOGGER.log(Level.SEVERE, "No lower layer set for sending request [{0}]", request);
+			LOGGER.log(Level.FINEST, "No lower layer set for sending request [{0}]", request);
 		}
 
 		@Override
 		public void sendResponse(final Exchange exchange, final Response response) {
-			LOGGER.log(Level.SEVERE, "No lower layer set for sending response [{0}]", response);
+			LOGGER.log(Level.FINEST, "No lower layer set for sending response [{0}]", response);
 		}
 
 		@Override
 		public void sendEmptyMessage(Exchange exchange, EmptyMessage emptyMessage) {
-			LOGGER.log(Level.SEVERE, "No lower layer set for sending empty message [{0}]", emptyMessage);
+			LOGGER.log(Level.FINEST, "No lower layer set for sending empty message [{0}]", emptyMessage);
 		}
 
 		@Override
 		public void receiveRequest(final Exchange exchange, final Request request) {
-			LOGGER.log(Level.SEVERE, "No upper layer set for receiving request [{0}]", request);
+			LOGGER.log(Level.FINEST, "No upper layer set for receiving request [{0}]", request);
 			
 		}
 
 		@Override
 		public void receiveResponse(final Exchange exchange, final Response response) {
-			LOGGER.log(Level.SEVERE, "No lower layer set for receiving response [{0}]", response);
+			LOGGER.log(Level.FINEST, "No lower layer set for receiving response [{0}]", response);
 		}
 
 		@Override
 		public void receiveEmptyMessage(final Exchange exchange, final EmptyMessage emptyMessage) {
-			LOGGER.log(Level.SEVERE, "No lower layer set for receiving empty message [{0}]", emptyMessage);
+			LOGGER.log(Level.FINEST, "No lower layer set for receiving empty message [{0}]", emptyMessage);
 		}
 
 		@Override

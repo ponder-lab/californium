@@ -120,7 +120,7 @@ public class TcpClientConnector implements Connector, TcpConnector {
 						channelPool.release(channel);
 					}
 				} else {
-					LOGGER.log(Level.WARNING, "Unable to open connection to " + msg.getAddress(), future.cause());
+					LOGGER.log(Level.FINEST, "Unable to open connection to " + msg.getAddress(), future.cause());
 				}
 			}
 		});

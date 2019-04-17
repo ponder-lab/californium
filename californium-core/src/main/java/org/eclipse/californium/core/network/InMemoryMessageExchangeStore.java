@@ -157,7 +157,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 
 	@Override
 	public boolean isEmpty() {
-		LOGGER.finer(dumpCurrentLoadLevels());
+		LOGGER.finest(dumpCurrentLoadLevels());
 		return exchangesByMID.isEmpty() && exchangesByToken.isEmpty() && ongoingExchanges.isEmpty() &&
 				deduplicator.isEmpty();
 	}
@@ -169,7 +169,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 			InetSocketAddress dest = new InetSocketAddress(message.getDestination(), message.getDestinationPort());
 			mid = messageIdProvider.getNextMessageId(dest);
 			if (Message.NONE == mid) {
-				LOGGER.log(Level.WARNING, "Cannot send message to {0}, all MIDs are in use", dest);
+				LOGGER.log(Level.FINEST, "Cannot send message to {0}, all MIDs are in use", dest);
 			} else {
 				message.setMID(mid);
 			}
@@ -185,7 +185,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 			if (Message.NONE != mid) {
 				KeyMID key = KeyMID.fromOutboundMessage(message);
 				if (exchangesByMID.putIfAbsent(key, exchange) != null) {
-					LOGGER.log(Level.WARNING,
+					LOGGER.log(Level.FINEST,
 							"newly generated MID [{0}] already in use, overwriting already registered exchange", mid);
 				}
 			}
@@ -217,7 +217,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 			if (!(exchange.getFailedTransmissionCount() > 0 || request.getOptions().hasBlock1()
 					|| request.getOptions().hasBlock2() || request.getOptions().hasObserve())
 					&& tokenProvider.isTokenInUse(idByToken)) {
-				LOGGER.log(Level.WARNING, "Manual token overrides existing open request: {0}", idByToken);
+				LOGGER.log(Level.FINEST, "Manual token overrides existing open request: {0}", idByToken);
 			}
 		}
 		exchangesByToken.put(idByToken, exchange);
@@ -257,7 +257,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 	public void remove(final KeyToken token, final Exchange exchange) {
 		boolean removed = exchangesByToken.remove(token, exchange);
 		if (removed) {
-			LOGGER.log(Level.FINE, "removing exchange for token {0}", new Object[] { token });
+			LOGGER.log(Level.FINEST, "removing exchange for token {0}", new Object[] { token });
 		}
 	}
 
@@ -272,7 +272,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 			removedExchange = null;
 		}
 		if (null != removedExchange) {
-			LOGGER.log(Level.FINE, "removing exchange for MID {0}", new Object[] { messageId });
+			LOGGER.log(Level.FINEST, "removing exchange for MID {0}", new Object[] { messageId });
 		}
 		return removedExchange;
 	}
@@ -323,7 +323,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 	@Override
 	public void remove(final KeyUri requestUri, final Exchange exchange) {
 		if (ongoingExchanges.remove(requestUri, exchange)) {
-			LOGGER.log(Level.FINE, "removing transfer for URI {0}, remaining ongoing exchanges: {1}", new Object[]{requestUri, ongoingExchanges.size()});
+			LOGGER.log(Level.FINEST, "removing transfer for URI {0}, remaining ongoing exchanges: {1}", new Object[]{requestUri, ongoingExchanges.size()});
 		}
 	}
 

@@ -212,7 +212,7 @@ public final class ECDHServerKeyExchange extends ServerKeyExchange {
 			break;
 
 		default:
-			LOGGER.log(Level.WARNING, MSG_UNKNOWN_CURVE_TYPE, curveType);
+			LOGGER.log(Level.FINEST, MSG_UNKNOWN_CURVE_TYPE, curveType);
 			break;
 		}
 
@@ -294,7 +294,7 @@ public final class ECDHServerKeyExchange extends ServerKeyExchange {
 			break;
 
 		default:
-			LOGGER.log(Level.WARNING, MSG_UNKNOWN_CURVE_TYPE, curveType);
+			LOGGER.log(Level.FINEST, MSG_UNKNOWN_CURVE_TYPE, curveType);
 			break;
 		}
 		
@@ -369,7 +369,7 @@ public final class ECDHServerKeyExchange extends ServerKeyExchange {
 			break;
 
 		default:
-			LOGGER.log(Level.WARNING, MSG_UNKNOWN_CURVE_TYPE, curveType);
+			LOGGER.log(Level.FINEST, MSG_UNKNOWN_CURVE_TYPE, curveType);
 			break;
 		}
 	}

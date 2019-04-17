@@ -394,7 +394,7 @@ public final class HttpTranslator {
 		try {
 			coapMethod = Integer.parseInt(coapMethodString.trim());
 		} catch (NumberFormatException e) {
-			LOGGER.warning("Cannot convert the http method in coap method: " + e);
+			LOGGER.severe("Cannot convert the http method in coap method: " + e);
 			throw new TranslationException("Cannot convert the http method in coap method", e);
 		}
 
@@ -409,10 +409,10 @@ public final class HttpTranslator {
 		try {
 			uriString = URLDecoder.decode(uriString, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.warning("Failed to decode the uri: " + e.getMessage());
+			LOGGER.severe("Failed to decode the uri: " + e.getMessage());
 			throw new TranslationException("Failed decoding the uri: " + e.getMessage());
 		} catch (Throwable e) {
-			LOGGER.warning("Malformed uri: " + e.getMessage());
+			LOGGER.severe("Malformed uri: " + e.getMessage());
 			throw new InvalidFieldException("Malformed uri: " + e.getMessage());
 		}
 
@@ -438,7 +438,7 @@ public final class HttpTranslator {
 			coapRequest.getOptions().setProxyUri(uriString);
 
 		} else {
-			LOGGER.warning("Malrouted request: " + httpRequest.getRequestLine());
+			LOGGER.severe("Malrouted request: " + httpRequest.getRequestLine());
 			return null;
 		}
 
@@ -509,7 +509,7 @@ public final class HttpTranslator {
 			String coapCodeString = HTTP_TRANSLATION_PROPERTIES.getProperty(KEY_HTTP_CODE + httpCode);
 
 			if (coapCodeString == null || coapCodeString.isEmpty()) {
-				LOGGER.warning("coapCodeString == null");
+				LOGGER.finest("coapCodeString == null");
 				throw new TranslationException("coapCodeString == null");
 			}
 
@@ -838,7 +838,7 @@ public final class HttpTranslator {
 		String httpCodeString = HTTP_TRANSLATION_PROPERTIES.getProperty(KEY_COAP_CODE + coapCode.value);
 
 		if (httpCodeString == null || httpCodeString.isEmpty()) {
-			LOGGER.warning("httpCodeString == null");
+			LOGGER.finest("httpCodeString == null");
 			throw new TranslationException("httpCodeString == null");
 		}
 
@@ -886,8 +886,8 @@ public final class HttpTranslator {
 				httpResponse.setHeader("content-type", contentType.toString());
 			}
 		}
-		LOGGER.info("Translated " + coapResponse);
-		LOGGER.info("To " + httpResponse);
+		LOGGER.finest("Translated " + coapResponse);
+		LOGGER.finest("To " + httpResponse);
 	}
 
 	/**

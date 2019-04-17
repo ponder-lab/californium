@@ -154,9 +154,9 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 					cachedResponse.getOptions().setMaxAge(newMaxAge);
 					cachedResponse.setTimestamp(newCurrentTime);
 
-					LOGGER.finer("Updated cached response");
+					LOGGER.finest("Updated cached response");
 				} else {
-					LOGGER.warning("No max-age option set in response: " + response);
+					LOGGER.finest("No max-age option set in response: " + response);
 				}
 			} else if (code == ResponseCode.CONTENT) {
 				// set max-age if not set
@@ -175,9 +175,9 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 						Response responseInserted = responseCache.get(cacheKey);
 						if (responseInserted != null) {
 //							if (Bench_Help.DO_LOG) 
-								LOGGER.finer("Cached response");
+								LOGGER.finest("Cached response");
 						} else {
-							LOGGER.warning("Failed to insert the response in the cache");
+							LOGGER.finest("Failed to insert the response in the cache");
 						}
 					} catch (Exception e) {
 						// swallow
@@ -190,7 +190,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 				}
 			} else {
 				// this code should not be reached
-				LOGGER.severe("Code not recognized: " + code);
+				LOGGER.finest("Code not recognized: " + code);
 			}
 		}
 	}
@@ -230,7 +230,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 
 		// if the response is not null, manage the cached response
 		if (response != null) {
-			LOGGER.finer("Cache hit");
+			LOGGER.finest("Cache hit");
 
 			// check if the response is expired
 			long currentTime = System.nanoTime();
@@ -242,12 +242,12 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 				// set the current time as the response timestamp
 				response.setTimestamp(currentTime);
 			} else {
-				LOGGER.finer("Expired response");
+				LOGGER.finest("Expired response");
 
 				// try to validate the response
 				response = validate(cacheKey);
 				if (response != null) {
-					LOGGER.finer("Validation successful");
+					LOGGER.finest("Validation successful");
 				} else {
 					invalidateRequest(cacheKey);
 				}
@@ -260,7 +260,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 	@Override
 	public void invalidateRequest(Request request) {
 		invalidateRequest(CacheKey.fromAcceptOptions(request));
-		LOGGER.finer("Invalidated request");
+		LOGGER.finest("Invalidated request");
 	}
 
 	@Override

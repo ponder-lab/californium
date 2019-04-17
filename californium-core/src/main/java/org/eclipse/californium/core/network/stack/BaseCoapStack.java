@@ -161,7 +161,7 @@ public abstract class BaseCoapStack implements CoapStack {
 			if (hasDeliverer()) {
 				deliverer.deliverRequest(exchange);
 			} else {
-				LOGGER.severe("Top of CoAP stack has no deliverer to deliver request");
+				LOGGER.finest("Top of CoAP stack has no deliverer to deliver request");
 			}
 		}
 
@@ -174,7 +174,7 @@ public abstract class BaseCoapStack implements CoapStack {
 				// notify request that response has arrived
 				deliverer.deliverResponse(exchange, response);
 			} else {
-				LOGGER.severe("Top of CoAP stack has no deliverer to deliver response");
+				LOGGER.finest("Top of CoAP stack has no deliverer to deliver response");
 			}
 		}
 

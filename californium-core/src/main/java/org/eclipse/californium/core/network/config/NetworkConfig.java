@@ -286,7 +286,7 @@ public final class NetworkConfig {
 		if (file == null) {
 			throw new NullPointerException("file must not be null");
 		} else {
-			LOGGER.log(Level.INFO, "loading properties from file {0}", file.getAbsolutePath());
+			LOGGER.log(Level.FINEST, "loading properties from file {0}", file.getAbsolutePath());
 			try (InputStream inStream = new FileInputStream(file)) {
 				load(inStream);
 			} catch (IOException e) {
@@ -330,7 +330,7 @@ public final class NetworkConfig {
 		if (file == null) {
 			throw new NullPointerException("file must not be null");
 		} else {
-			LOGGER.log(Level.INFO, "writing properties to file {0}", file.getAbsolutePath());
+			LOGGER.log(Level.FINEST, "writing properties to file {0}", file.getAbsolutePath());
 			try (FileWriter writer = new FileWriter(file)) {
 				properties.store(writer, header);
 			} catch (IOException e) {
@@ -497,7 +497,7 @@ public final class NetworkConfig {
 						new Object[] { key, defaultValue.getClass() });
 			}
 		} else {
-			LOGGER.log(Level.WARNING, "key [{0}] is undefined, returning default value", key);
+			LOGGER.log(Level.FINEST, "key [{0}] is undefined, returning default value", key);
 		}
 		return result;
 	}
@@ -513,7 +513,7 @@ public final class NetworkConfig {
 		if (value != null) {
 			return Boolean.parseBoolean(value);
 		} else {
-			LOGGER.log(Level.WARNING, "Key [{0}] is undefined", key);
+			LOGGER.log(Level.FINEST, "Key [{0}] is undefined", key);
 			return false;
 		}
 	}

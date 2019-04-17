@@ -86,7 +86,7 @@ public class TlsConnectorTest {
 		Enumeration<String> aliases = keyStore.aliases();
 		while (aliases.hasMoreElements()) {
 			++counter;
-			LOGGER.log(Level.INFO, "{0}. KeyStore Alias: {1}", new Object[] { counter, aliases.nextElement() });
+			LOGGER.log(Level.FINE, "{0}. KeyStore Alias: {1}", new Object[] { counter, aliases.nextElement() });
 		}
 		// Set up key manager factory to use our key store
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance(algorithm);
@@ -229,7 +229,7 @@ public class TlsConnectorTest {
 				}
 			}
 			for (X509Certificate cert : x509Certificates) {
-				LOGGER.log(Level.WARNING, "Untrusted certificate from {0}", cert.getSubjectDN().getName());
+				LOGGER.log(Level.FINER, "Untrusted certificate from {0}", cert.getSubjectDN().getName());
 			}
 			if (0 < x509Certificates.length) {
 				throw new CertificateException(

@@ -67,7 +67,7 @@ public class ProxyProperties extends java.util.Properties {
 				LOGGER.severe(String.format("Invalid double property: %s=%s", key, value));
 			}
 		} else {
-			LOGGER.severe(String.format("Undefined double property: %s", key));
+			LOGGER.finest(String.format("Undefined double property: %s", key));
 		}
 		return 0.0;
 	}
@@ -81,7 +81,7 @@ public class ProxyProperties extends java.util.Properties {
 				LOGGER.severe(String.format("Invalid integer property: %s=%s", key, value));
 			}
 		} else {
-			LOGGER.severe(String.format("Undefined integer property: %s", key));
+			LOGGER.finest(String.format("Undefined integer property: %s", key));
 		}
 		return 0;
 	}
@@ -89,7 +89,7 @@ public class ProxyProperties extends java.util.Properties {
 	public String getStr(String key) {
 		String value = getProperty(key);
 		if (value == null) {
-			LOGGER.severe(String.format("Undefined string property: %s", key));
+			LOGGER.finest(String.format("Undefined string property: %s", key));
 		}
 		return value;
 	}
@@ -103,7 +103,7 @@ public class ProxyProperties extends java.util.Properties {
 				LOGGER.severe(String.format("Invalid boolean property: %s=%s", key, value));
 			}
 		} else {
-			LOGGER.severe(String.format("Undefined boolean property: %s", key));
+			LOGGER.finest(String.format("Undefined boolean property: %s", key));
 		}
 		return false;
 	}

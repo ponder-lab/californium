@@ -117,7 +117,7 @@ public final class CoapTranslator {
 		// set the proxy-uri as the outgoing uri
 		outgoingRequest.setURI(serverUri);
 
-		LOGGER.finer("Incoming request translated correctly");
+		LOGGER.warning("Incoming request translated correctly");
 		return outgoingRequest;
 	}
 	
@@ -155,7 +155,7 @@ public final class CoapTranslator {
 		outgoingResponse.setOptions(new OptionSet(
 				incomingResponse.getOptions()));
 		
-		LOGGER.finer("Incoming response translated correctly");
+		LOGGER.finest("Incoming response translated correctly");
 		return outgoingResponse;
 	}
 

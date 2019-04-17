@@ -65,7 +65,7 @@ public class MappingProperties extends java.util.Properties {
 				LOG.severe(String.format("Invalid double property: %s=%s", key, value));
 			}
 		} else {
-			LOG.severe(String.format("Undefined double property: %s", key));
+			LOG.finest(String.format("Undefined double property: %s", key));
 		}
 		return 0.0;
 	}
@@ -79,7 +79,7 @@ public class MappingProperties extends java.util.Properties {
 				LOG.severe(String.format("Invalid integer property: %s=%s", key, value));
 			}
 		} else {
-			LOG.severe(String.format("Undefined integer property: %s", key));
+			LOG.finest(String.format("Undefined integer property: %s", key));
 		}
 		return 0;
 	}
@@ -87,7 +87,7 @@ public class MappingProperties extends java.util.Properties {
 	public String getStr(String key) {
 		String value = getProperty(key);
 		if (value == null) {
-			LOG.severe(String.format("Undefined string property: %s", key));
+			LOG.finest(String.format("Undefined string property: %s", key));
 		}
 		return value;
 	}
@@ -101,7 +101,7 @@ public class MappingProperties extends java.util.Properties {
 				LOG.severe(String.format("Invalid boolean property: %s=%s", key, value));
 			}
 		} else {
-			LOG.severe(String.format("Undefined boolean property: %s", key));
+			LOG.finest(String.format("Undefined boolean property: %s", key));
 		}
 		return false;
 	}
