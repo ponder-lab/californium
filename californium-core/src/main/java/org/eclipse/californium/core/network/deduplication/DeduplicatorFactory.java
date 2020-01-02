@@ -79,7 +79,7 @@ public class DeduplicatorFactory {
 		case NetworkConfig.Keys.NO_DEDUPLICATOR:
 			return new NoDeduplicator();
 		default:
-			LOGGER.warn("configuration contains unsupported deduplicator type, duplicate detection will be turned off");
+			LOGGER.trace("configuration contains unsupported deduplicator type, duplicate detection will be turned off");
 			return new NoDeduplicator();
 		}
 	}

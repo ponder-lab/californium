@@ -146,7 +146,7 @@ public class ProxyHttpClientResource extends ForwardingResource {
 
 			@Override
 			public void cancelled() {
-				LOGGER.warn("Request canceled");
+				LOGGER.trace("Request canceled");
 				future.complete(new Response(ResponseCode.SERVICE_UNAVAILABLE));
 			}
 		});

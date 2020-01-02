@@ -429,7 +429,7 @@ public abstract class Handshaker implements Destroyable {
 						return null;
 					}
 				default:
-					LOGGER.warn("Cannot process message of type [{}], discarding...", fragment.getContentType());
+					LOGGER.info("Cannot process message of type [{}], discarding...", fragment.getContentType());
 					return null;
 				}
 			} else {
@@ -1081,7 +1081,7 @@ public abstract class Handshaker implements Destroyable {
 			deferredRecordsSize += size;
 			return true;
 		} else {
-			LOGGER.debug("Dropped incoming record from peer [{}], limit of {} bytes exceeded by {}+{} bytes!",
+			LOGGER.trace("Dropped incoming record from peer [{}], limit of {} bytes exceeded by {}+{} bytes!",
 					incomingMessage.getPeerAddress(), maxDeferredProcessedIncomingRecordsSize, deferredRecordsSize, size);
 			return false;
 		}

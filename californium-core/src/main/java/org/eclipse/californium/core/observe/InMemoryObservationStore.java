@@ -71,9 +71,9 @@ public final class InMemoryObservationStore implements ObservationStore {
 			enableStatus = true;
 			Observation result = map.putIfAbsent(key, obs);
 			if (result == null) {
-				LOGGER.debug("added observation for {}", key);
+				LOGGER.trace("added observation for {}", key);
 			} else {
-				LOGGER.debug("kept observation {} for {}", result, key);
+				LOGGER.trace("kept observation {} for {}", result, key);
 			}
 			return result;
 		}
@@ -89,9 +89,9 @@ public final class InMemoryObservationStore implements ObservationStore {
 			enableStatus = true;
 			Observation result = map.put(key, obs);
 			if (result == null) {
-				LOGGER.debug("added observation for {}", key);
+				LOGGER.trace("added observation for {}", key);
 			} else {
-				LOGGER.debug("replaced observation {} for {}", result, key);
+				LOGGER.trace("replaced observation {} for {}", result, key);
 			}
 			return result;
 		}
@@ -103,7 +103,7 @@ public final class InMemoryObservationStore implements ObservationStore {
 			return null;
 		} else {
 			Observation obs = map.get(token);
-			LOGGER.debug("looking up observation for token {}: {}", token, obs);
+			LOGGER.trace("looking up observation for token {}: {}", token, obs);
 			// clone request in order to prevent accumulation of
 			// message observers on original request
 			return ObservationUtil.shallowClone(obs);
@@ -114,7 +114,7 @@ public final class InMemoryObservationStore implements ObservationStore {
 	public void remove(Token token) {
 		if (token != null) {
 			if (map.remove(token) != null) {
-				LOGGER.debug("removed observation for token {}", token);
+				LOGGER.trace("removed observation for token {}", token);
 			} else {
 				LOGGER.debug("Already removed observation for token {}", token);
 			}

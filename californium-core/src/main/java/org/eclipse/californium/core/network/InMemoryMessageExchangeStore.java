@@ -134,7 +134,7 @@ public class InMemoryMessageExchangeStore implements MessageExchangeStore {
 		this.endpointIdentityResolver = endpointResolver;
 		this.config = config;
 		this.tag = StringUtil.normalizeLoggingTag(tag);
-		LOGGER.debug("{}using TokenProvider {}", tag, tokenProvider.getClass().getName());
+		LOGGER.trace("{}using TokenProvider {}", tag, tokenProvider.getClass().getName());
 	}
 
 	private void startStatusLogging() {

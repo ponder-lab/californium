@@ -80,28 +80,28 @@ public class ProxyCoapClientResource extends ForwardingResource {
 
 				@Override
 				public void onResponse(Response incomingResponse) {
-					LOGGER.debug("ProxyCoapClientResource received {}", incomingResponse);
+					LOGGER.trace("ProxyCoapClientResource received {}", incomingResponse);
 					future.complete(CoapTranslator.getResponse(incomingResponse));
 					EndPointManagerPool.putClient(endpointManager);
 				}
 
 				@Override
 				public void onReject() {
-					LOGGER.warn("Request rejected");
+					LOGGER.trace("Request rejected");
 					future.complete(new Response(ResponseCode.SERVICE_UNAVAILABLE));
 					EndPointManagerPool.putClient(endpointManager);
 				}
 
 				@Override
 				public void onTimeout() {
-					LOGGER.warn("Request timed out.");
+					LOGGER.trace("Request timed out.");
 					future.complete(new Response(ResponseCode.GATEWAY_TIMEOUT));
 					EndPointManagerPool.putClient(endpointManager);
 				}
 
 				@Override
 				public void onCancel() {
-					LOGGER.warn("Request canceled");
+					LOGGER.trace("Request canceled");
 					future.complete(new Response(ResponseCode.SERVICE_UNAVAILABLE));
 					EndPointManagerPool.putClient(endpointManager);
 				}

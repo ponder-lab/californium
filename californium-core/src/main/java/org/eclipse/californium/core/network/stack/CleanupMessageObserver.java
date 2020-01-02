@@ -54,10 +54,10 @@ public class CleanupMessageObserver extends MessageObserverAdapter {
 		if (exchange.executeComplete()) {
 			if (exchange.isOfLocalOrigin()) {
 				Request request = exchange.getCurrentRequest();
-				LOGGER.debug("{}, {} request [MID={}, {}]", action, exchange, request.getMID(), request.getToken());
+				LOGGER.trace("{}, {} request [MID={}, {}]", action, exchange, request.getMID(), request.getToken());
 			} else {
 				Response response = exchange.getCurrentResponse();
-				LOGGER.debug("{}, {} response [MID={}, {}]", action, exchange, response.getMID(), response.getToken());
+				LOGGER.trace("{}, {} response [MID={}, {}]", action, exchange, response.getMID(), response.getToken());
 			}
 		}
 	}

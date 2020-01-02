@@ -120,7 +120,7 @@ public final class UdpMatcher extends BaseMatcher {
 			if (exchangeStore.assignMessageId(request) != Message.NONE) {
 				registerObserve(request);
 			} else {
-				LOGGER.warn("message IDs exhausted, could not register outbound observe request for tracking");
+				LOGGER.debug("message IDs exhausted, could not register outbound observe request for tracking");
 				request.setSendError(new IllegalStateException("automatic message IDs exhausted"));
 				return;
 			}
@@ -131,7 +131,7 @@ public final class UdpMatcher extends BaseMatcher {
 				exchange.setRemoveHandler(exchangeRemoveHandler);
 				LOGGER.debug("tracking open request [MID: {}, Token: {}]", request.getMID(), request.getToken());
 			} else {
-				LOGGER.warn("message IDs exhausted, could not register outbound request for tracking");
+				LOGGER.debug("message IDs exhausted, could not register outbound request for tracking");
 				request.setSendError(new IllegalStateException("automatic message IDs exhausted"));
 			}
 		} catch (IllegalArgumentException ex) {

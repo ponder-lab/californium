@@ -623,7 +623,7 @@ public class OSCoreCtx {
 				id_length = 7;
 				key_length = common_alg.getKeySize() / 8; // 16;
 			} else {
-				LOGGER.error("Unable to set lengths, since algorithm");
+				LOGGER.trace("Unable to set lengths, since algorithm");
 				throw new RuntimeException("Unable to set lengths, since algorithm");
 			}
 		} else {

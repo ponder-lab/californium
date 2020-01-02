@@ -162,7 +162,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 
 					LOGGER.debug("Updated cached response");
 				} else {
-					LOGGER.warn("No max-age option set in response: {}", response);
+					LOGGER.info("No max-age option set in response: {}", response);
 				}
 			} else if (code == ResponseCode.CONTENT) {
 				// set max-age if not set
@@ -196,7 +196,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 				}
 			} else {
 				// this code should not be reached
-				LOGGER.error("Code not recognized: {}", code);
+				LOGGER.info("Code not recognized: {}", code);
 			}
 		}
 	}
@@ -266,7 +266,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 	@Override
 	public void invalidateRequest(Request request) {
 		invalidateRequest(CacheKey.fromAcceptOptions(request));
-		LOGGER.debug("Invalidated request");
+		LOGGER.trace("Invalidated request");
 	}
 
 	@Override

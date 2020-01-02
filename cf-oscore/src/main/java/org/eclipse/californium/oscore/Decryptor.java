@@ -157,7 +157,7 @@ public abstract class Decryptor {
 	 */
 	private static byte[] expandToIntSize(byte[] partialIV) throws OSException {
 		if (partialIV.length > INTEGER_BYTES) {
-			LOGGER.error("The partial IV is: " + partialIV.length + " long, " + INTEGER_BYTES + " was expected");
+			LOGGER.trace("The partial IV is: " + partialIV.length + " long, " + INTEGER_BYTES + " was expected");
 			throw new OSException("Partial IV too long");
 		} else if (partialIV.length == INTEGER_BYTES) {
 			return partialIV;

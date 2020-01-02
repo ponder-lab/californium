@@ -88,7 +88,7 @@ public class ReliabilityLayer extends AbstractLayer {
 	@Override
 	public void sendRequest(final Exchange exchange, final Request request) {
 
-		LOGGER.debug("{} send request, failed transmissions: {}", exchange, exchange.getFailedTransmissionCount());
+		LOGGER.severe("{} send request, failed transmissions: {}", exchange, exchange.getFailedTransmissionCount());
 
 		if (request.getType() == null) {
 			request.setType(Type.CON);
@@ -114,7 +114,7 @@ public class ReliabilityLayer extends AbstractLayer {
 	@Override
 	public void sendResponse(final Exchange exchange, final Response response) {
 
-		LOGGER.debug("{} send response {}, failed transmissions: {}", exchange, response,
+		LOGGER.severe("{} send response {}, failed transmissions: {}", exchange, response,
 				exchange.getFailedTransmissionCount());
 
 		// If a response type is set, we do not mess around with it.
@@ -231,7 +231,7 @@ public class ReliabilityLayer extends AbstractLayer {
 						// retransmission cycle
 						int failedCount = exchange.getFailedTransmissionCount() + 1;
 						exchange.setFailedTransmissionCount(failedCount);
-						LOGGER.debug("{} request duplicate: retransmit response, failed: {}, response: {}", exchange,
+						LOGGER.severe("{} request duplicate: retransmit response, failed: {}, response: {}", exchange,
 								failedCount, currentResponse);
 						currentResponse.retransmitting();
 						sendResponse(exchange, currentResponse);
@@ -445,7 +445,7 @@ public class ReliabilityLayer extends AbstractLayer {
 				int failedCount = exchange.getFailedTransmissionCount() + 1;
 				exchange.setFailedTransmissionCount(failedCount);
 
-				LOGGER.debug("Timeout: for {} retry {} of {}", exchange, failedCount, message);
+				LOGGER.warn("Timeout: for {} retry {} of {}", exchange, failedCount, message);
 
 				if (message.isAcknowledged()) {
 					LOGGER.trace("Timeout: for {} message already acknowledged, cancel retransmission of {}", exchange,
@@ -462,7 +462,7 @@ public class ReliabilityLayer extends AbstractLayer {
 					return;
 
 				} else if (failedCount <= getReliabilityLayerParameters().getMaxRetransmit()) {
-					LOGGER.debug("Timeout: for {} retransmit message, failed: {}, message: {}", exchange, failedCount,
+					LOGGER.warn("Timeout: for {} retransmit message, failed: {}, message: {}", exchange, failedCount,
 							message);
 
 					// Trigger MessageObservers

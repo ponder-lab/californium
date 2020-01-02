@@ -840,7 +840,7 @@ public class SslContextUtil {
 						}
 						keys.setPublicKey(read);
 					} else {
-						LOGGER.warn("{} not supported!", tag);
+						LOGGER.trace("{} not supported!", tag);
 					}
 				}
 			}

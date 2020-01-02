@@ -209,7 +209,7 @@ public abstract class BaseCoapStack implements CoapStack {
 				// notify request that response has arrived
 				deliverer.deliverResponse(exchange, response);
 			} else {
-				LOGGER.error("Top of CoAP stack has no deliverer to deliver response");
+				LOGGER.info("Top of CoAP stack has no deliverer to deliver response");
 			}
 		}
 

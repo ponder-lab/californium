@@ -108,7 +108,7 @@ public class ServerMessageDeliverer implements MessageDeliverer {
 					resource.handleRequest(exchange);
 				}
 			} else {
-				LOGGER.info("did not find resource {} requested by {}", path,
+				LOGGER.debug("did not find resource {} requested by {}", path,
 						request.getSourceContext().getPeerAddress());
 				exchange.sendResponse(new Response(ResponseCode.NOT_FOUND));
 			}

@@ -141,7 +141,7 @@ public class ObserveLayer extends AbstractLayer {
 
 		if (response.isNotification() && exchange.getRequest().isCanceled()) {
 			// The request was canceled and we no longer want notifications
-			LOGGER.debug("rejecting notification for canceled Exchange");
+			LOGGER.trace("rejecting notification for canceled Exchange");
 			EmptyMessage rst = EmptyMessage.newRST(response);
 			sendEmptyMessage(exchange, rst);
 			// Matcher sets exchange as complete when RST is sent
@@ -228,7 +228,7 @@ public class ObserveLayer extends AbstractLayer {
 		@Override
 		public void onTimeout() {
 			ObserveRelation relation = exchange.getRelation();
-			LOGGER.info("notification for token [{}] timed out. Canceling all relations with source [{}]",
+			LOGGER.debug("notification for token [{}] timed out. Canceling all relations with source [{}]",
 					relation.getExchange().getRequest().getToken(), relation.getSource());
 			relation.cancelAll();
 		}

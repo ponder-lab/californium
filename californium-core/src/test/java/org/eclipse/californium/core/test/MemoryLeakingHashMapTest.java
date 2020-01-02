@@ -521,7 +521,7 @@ public class MemoryLeakingHashMapTest {
 				return;
 			}
 
-			LOGGER.debug("Client received notification {}: [{}]", counter, response.getResponseText());
+			LOGGER.trace("Client received notification {}: [{}]", counter, response.getResponseText());
 
 			if (cancelProactively) {
 				if ((counter + 1) == expectedNotifies) {
