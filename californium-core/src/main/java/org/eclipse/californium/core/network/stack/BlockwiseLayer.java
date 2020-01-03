@@ -828,12 +828,12 @@ public class BlockwiseLayer extends AbstractLayer {
 			// ongoing blockwise transfer
 			if (starting) {
 				if (status.isNew(response)) {
-					LOGGER.debug("discarding outdated block2 transfer {}, current is [{}]", status.getObserve(),
+					LOGGER.trace("discarding outdated block2 transfer {}, current is [{}]", status.getObserve(),
 							response);
 					clearBlock2Status(key, status);
 					status.completeOldTransfer(exchange);
 				} else {
-					LOGGER.debug("discarding old block2 transfer [{}], received during ongoing block2 transfer {}",
+					LOGGER.trace("discarding old block2 transfer [{}], received during ongoing block2 transfer {}",
 							response, status.getObserve());
 					status.completeNewTranfer(exchange);
 					return true;
@@ -1080,7 +1080,7 @@ public class BlockwiseLayer extends AbstractLayer {
 		Block1BlockwiseStatus newStatus;
 		synchronized (block1Transfers) {
 			removedStatus = block1Transfers.remove(key);
-			LOGGER.warn("inbound block1 transfer reset at {} by peer: {}", removedStatus, request);
+			LOGGER.info("inbound block1 transfer reset at {} by peer: {}", removedStatus, request);
 			// remove old status ensures, that getInboundBlock1Status could be
 			// called in synchronized (block1Transfers)
 			newStatus = getInboundBlock1Status(key, exchange, request);
@@ -1150,7 +1150,7 @@ public class BlockwiseLayer extends AbstractLayer {
 			LOGGER.debug("stop previous block transfer {} {} for new {}", key, previousStatus, response);
 			previousStatus.completeResponse();
 		} else {
-			LOGGER.debug("block transfer {} for {}", key, response);
+			LOGGER.trace("block transfer {} for {}", key, response);
 		}
 		return newStatus;
 	}

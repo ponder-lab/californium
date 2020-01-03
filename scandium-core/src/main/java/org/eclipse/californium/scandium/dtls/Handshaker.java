@@ -1081,7 +1081,7 @@ public abstract class Handshaker implements Destroyable {
 			deferredRecordsSize += size;
 			return true;
 		} else {
-			LOGGER.debug("Dropped incoming record from peer [{}], limit of {} bytes exceeded by {}+{} bytes!",
+			LOGGER.trace("Dropped incoming record from peer [{}], limit of {} bytes exceeded by {}+{} bytes!",
 					incomingMessage.getPeerAddress(), maxDeferredProcessedIncomingRecordsSize, deferredRecordsSize, size);
 			return false;
 		}

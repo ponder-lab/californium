@@ -277,7 +277,7 @@ public class CoapClient {
 		executor.execute(new Runnable() {
 
 			public void run() {
-				LOGGER.info("using a SingleThreadExecutor for the CoapClient");
+				LOGGER.trace("using a SingleThreadExecutor for the CoapClient");
 			};
 		});
 		return this;

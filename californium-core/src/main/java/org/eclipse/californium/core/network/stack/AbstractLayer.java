@@ -192,12 +192,12 @@ public abstract class AbstractLayer implements Layer {
 
 		@Override
 		public void sendRequest(final Exchange exchange, final Request request) {
-			LOGGER.error("No lower layer set for sending request [{}]", request);
+			LOGGER.trace("No lower layer set for sending request [{}]", request);
 		}
 
 		@Override
 		public void sendResponse(final Exchange exchange, final Response response) {
-			LOGGER.error("No lower layer set for sending response [{}]", response);
+			LOGGER.trace("No lower layer set for sending response [{}]", response);
 		}
 
 		@Override

@@ -189,7 +189,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 			ObservationRequest pendingObservation = observesByPeer.putIfAbsent(key,
 					new ObservationRequest(exchange, Token.EMPTY));
 			if (pendingObservation != null && pendingObservation.getObservationToken().equals(Token.EMPTY)) {
-				LOGGER.warn("Too many requests from {} (pending {}, current {})", key,
+				LOGGER.trace("Too many requests from {} (pending {}, current {})", key,
 						pendingObservation.getIncomingExchange().getRequest().getMID(), request.getMID());
 				exchange.respond(SERVICE_UNAVAILABLE);
 			} else {
@@ -235,9 +235,9 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 		} else {
 			String peer = peersByToken.get(token);
 			if (peer != null) {
-				LOGGER.info("Notification {} from old observe: {}", response, peer);
+				LOGGER.trace("Notification {} from old observe: {}", response, peer);
 			} else {
-				LOGGER.info("Notification {} from unkown observe", response);
+				LOGGER.trace("Notification {} from unkown observe", response);
 			}
 		}
 	}
@@ -429,7 +429,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 		private void remove(ResponseCode code) {
 			String key = incomingExchange.getPeerKey();
 			observesByPeer.remove(key);
-			LOGGER.info("Removed observation for {}", key);
+			LOGGER.trace("Removed observation for {}", key);
 			incomingExchange.respond(code);
 		}
 	}
