@@ -80,10 +80,10 @@ public final class DebugConnectionStore extends InMemoryConnectionStore {
 	 */
 	private void dump(Connection connection) {
 		if (connection.hasEstablishedSession()) {
-			LOG.info("  {}connection: {} - {} : {}", tag, connection.getConnectionId(),
+			LOG.trace("  {}connection: {} - {} : {}", tag, connection.getConnectionId(),
 					connection.getPeerAddress(), connection.getEstablishedSession().getSessionIdentifier());
 		} else {
-			LOG.info("  {}connection: {} - {}", tag, connection.getConnectionId(), connection.getPeerAddress());
+			LOG.trace("  {}connection: {} - {}", tag, connection.getConnectionId(), connection.getPeerAddress());
 		}
 	}
 

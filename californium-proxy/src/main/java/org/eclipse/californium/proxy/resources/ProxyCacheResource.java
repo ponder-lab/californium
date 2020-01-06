@@ -253,7 +253,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 				// try to validate the response
 				response = validate(cacheKey);
 				if (response != null) {
-					LOGGER.debug("Validation successful");
+					LOGGER.trace("Validation successful");
 				} else {
 					invalidateRequest(cacheKey);
 				}
