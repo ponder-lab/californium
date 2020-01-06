@@ -248,12 +248,12 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 				// set the current time as the response timestamp
 				response.setNanoTimestamp(currentTime);
 			} else {
-				LOGGER.debug("Expired response");
+				LOGGER.trace("Expired response");
 
 				// try to validate the response
 				response = validate(cacheKey);
 				if (response != null) {
-					LOGGER.debug("Validation successful");
+					LOGGER.trace("Validation successful");
 				} else {
 					invalidateRequest(cacheKey);
 				}
