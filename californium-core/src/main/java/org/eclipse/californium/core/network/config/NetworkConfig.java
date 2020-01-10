@@ -314,7 +314,7 @@ public final class NetworkConfig {
 	 * @return the configuration
 	 */
 	public static NetworkConfig createStandardWithoutFile() {
-		LOGGER.info("Creating standard network configuration properties without a file");
+		LOGGER.trace("Creating standard network configuration properties without a file");
 		return standard = new NetworkConfig();
 	}
 

@@ -62,11 +62,11 @@ public final class DebugConnectionStore extends InMemoryConnectionStore {
 	 */
 	public boolean dump(InetSocketAddress address) {
 		if (connections.size() == 0) {
-			LOG.info("  {}connections empty!", tag);
+			LOG.trace("  {}connections empty!", tag);
 		} else {
 			Connection connection = get(address);
 			if (connection == null) {
-				LOG.info("  {}connection: {} - not available!", tag, address);
+				LOG.trace("  {}connection: {} - not available!", tag, address);
 			} else {
 				dump(connection);
 				return true;
@@ -80,10 +80,10 @@ public final class DebugConnectionStore extends InMemoryConnectionStore {
 	 */
 	private void dump(Connection connection) {
 		if (connection.hasEstablishedSession()) {
-			LOG.info("  {}connection: {} - {} : {}", tag, connection.getConnectionId(),
+			LOG.trace("  {}connection: {} - {} : {}", tag, connection.getConnectionId(),
 					connection.getPeerAddress(), connection.getEstablishedSession().getSessionIdentifier());
 		} else {
-			LOG.info("  {}connection: {} - {}", tag, connection.getConnectionId(), connection.getPeerAddress());
+			LOG.trace("  {}connection: {} - {}", tag, connection.getConnectionId(), connection.getPeerAddress());
 		}
 	}
 

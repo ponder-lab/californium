@@ -1081,7 +1081,7 @@ public abstract class Handshaker implements Destroyable {
 			deferredRecordsSize += size;
 			return true;
 		} else {
-			LOGGER.debug("Dropped incoming record from peer [{}], limit of {} bytes exceeded by {}+{} bytes!",
+			LOGGER.trace("Dropped incoming record from peer [{}], limit of {} bytes exceeded by {}+{} bytes!",
 					incomingMessage.getPeerAddress(), maxDeferredProcessedIncomingRecordsSize, deferredRecordsSize, size);
 			return false;
 		}
@@ -1174,7 +1174,7 @@ public abstract class Handshaker implements Destroyable {
 	}
 
 	protected final void handshakeStarted() throws HandshakeException {
-		LOGGER.debug("handshake started {}", connection);
+		LOGGER.trace("handshake started {}", connection);
 		for (SessionListener sessionListener : sessionListeners) {
 			sessionListener.handshakeStarted(this);
 		}

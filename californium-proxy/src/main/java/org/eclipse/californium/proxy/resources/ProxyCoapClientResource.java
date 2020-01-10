@@ -80,7 +80,7 @@ public class ProxyCoapClientResource extends ForwardingResource {
 
 				@Override
 				public void onResponse(Response incomingResponse) {
-					LOGGER.debug("ProxyCoapClientResource received {}", incomingResponse);
+					LOGGER.trace("ProxyCoapClientResource received {}", incomingResponse);
 					future.complete(CoapTranslator.getResponse(incomingResponse));
 					EndPointManagerPool.putClient(endpointManager);
 				}
@@ -119,7 +119,7 @@ public class ProxyCoapClientResource extends ForwardingResource {
 			});
 
 			// execute the request
-			LOGGER.debug("Sending proxied CoAP request.");
+			LOGGER.info("Sending proxied CoAP request.");
 
 			if (outgoingRequest.getDestination() == null) {
 				throw new NullPointerException("Destination is null");

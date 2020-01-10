@@ -74,7 +74,7 @@ public class CountingCoapHandler implements CoapHandler {
 			}
 			notifyAll();
 		}
-		LOGGER.info("Received {}. Notification: {}", counter, response.advanced());
+		LOGGER.trace("Received {}. Notification: {}", counter, response.advanced());
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class CountingCoapHandler implements CoapHandler {
 			counter = errorCalls.incrementAndGet();
 			notifyAll();
 		}
-		LOGGER.info("{} Errors!", counter);
+		LOGGER.trace("{} Errors!", counter);
 	}
 
 	public int getOnLoadCalls() {

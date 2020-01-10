@@ -163,7 +163,7 @@ public class DtlsAeadConnectionState extends DTLSConnectionState {
 						.append(StringUtil.byteArray2HexString(explicitNonceUsed));
 				b.append(StringUtil.lineSeparator()).append("Expected: ")
 						.append(StringUtil.byteArray2HexString(explicitNonce));
-				LOGGER.debug(b.toString());
+				LOGGER.trace(b.toString());
 			}
 		}
 		byte[] payload = AeadBlockCipher.decrypt(cipherSuite, encryptionKey, nonce, additionalData, ciphertextFragment,

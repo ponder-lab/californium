@@ -71,7 +71,7 @@ public class TcpObserveLayer extends AbstractLayer {
 	public void receiveResponse(final Exchange exchange, final Response response) {
 		if (response.getOptions().hasObserve() && exchange.getRequest().isCanceled()) {
 			// The request was canceled and we no longer want notifications
-			LOGGER.debug("ignoring notification for canceled TCP Exchange");
+			LOGGER.trace("ignoring notification for canceled TCP Exchange");
 		} else {
 			// No observe option in response => always deliver
 			upper().receiveResponse(exchange, response);

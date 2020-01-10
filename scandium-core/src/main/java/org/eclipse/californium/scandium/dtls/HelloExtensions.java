@@ -161,7 +161,7 @@ public final class HelloExtensions {
 								new AlertMessage(AlertLevel.FATAL, AlertDescription.DECODE_ERROR, peerAddress));
 					}
 				} else {
-					LOGGER.debug("Peer included an unknown extension type code [{}] in its Hello message", typeId);
+					LOGGER.info("Peer included an unknown extension type code [{}] in its Hello message", typeId);
 				}
 			}
 

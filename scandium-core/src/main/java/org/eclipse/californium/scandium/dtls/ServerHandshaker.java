@@ -707,7 +707,7 @@ public class ServerHandshaker extends Handshaker {
 					session.setCipherSuite(cipherSuite);
 					addServerHelloExtensions(cipherSuite, clientHello, serverHelloExtensions);
 					session.setParameterAvailable();
-					LOGGER.debug("Negotiated cipher suite [{}] with peer [{}]",
+					LOGGER.info("Negotiated cipher suite [{}] with peer [{}]",
 							cipherSuite.name(), getPeerAddress());
 					return;
 				}

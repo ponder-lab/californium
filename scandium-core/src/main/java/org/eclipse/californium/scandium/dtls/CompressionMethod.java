@@ -74,7 +74,7 @@ public enum CompressionMethod {
 			return CompressionMethod.DEFLATE;
 
 		default:
-			LOGGER.debug("Unknown compression method code: {}", code);
+			LOGGER.trace("Unknown compression method code: {}", code);
 			return null;
 		}
 	}

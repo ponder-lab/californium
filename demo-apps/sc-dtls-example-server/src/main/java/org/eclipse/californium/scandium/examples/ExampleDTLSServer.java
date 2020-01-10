@@ -95,7 +95,7 @@ public class ExampleDTLSServer {
 		@Override
 		public void receiveData(final RawData raw) {
 			if (LOG.isInfoEnabled()) {
-				LOG.info("Received request: {}", new String(raw.getBytes()));
+				LOG.trace("Received request: {}", new String(raw.getBytes()));
 			}
 			RawData response = RawData.outbound("ACK".getBytes(),
 					raw.getEndpointContext(), null, false);

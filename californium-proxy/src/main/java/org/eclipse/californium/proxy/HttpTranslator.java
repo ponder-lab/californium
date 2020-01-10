@@ -664,7 +664,7 @@ public final class HttpTranslator {
 				try {
 					contentType = ContentType.parse(coapContentTypeString);
 				} catch (UnsupportedCharsetException e) {
-					LOGGER.debug("Cannot convert string to ContentType", e);
+					LOGGER.trace("Cannot convert string to ContentType", e);
 					contentType = ContentType.APPLICATION_OCTET_STREAM;
 				}
 			}
@@ -920,7 +920,7 @@ public final class HttpTranslator {
 			if (coapResponse.getOptions().getContentFormat() == MediaTypeRegistry.UNDEFINED
 					&& (ResponseCode.isClientError(coapCode) 
 					|| ResponseCode.isServerError(coapCode))) {
-				LOGGER.info("Set contenttype to TEXT_PLAIN");
+				LOGGER.trace("Set contenttype to TEXT_PLAIN");
 				coapResponse.getOptions().setContentFormat(MediaTypeRegistry.TEXT_PLAIN);
 			}
 
@@ -971,7 +971,7 @@ public final class HttpTranslator {
 			// If the character sequence starting at the input buffer's current
 			// position cannot be mapped to an equivalent byte sequence and the
 			// current unmappable-character
-			LOGGER.debug("Charset translation: cannot mapped to an output char byte", e);
+			LOGGER.trace("Charset translation: cannot mapped to an output char byte", e);
 			return null;
 		} catch (CharacterCodingException e) {
 			LOGGER.warn("Problem in the decoding/encoding charset", e);

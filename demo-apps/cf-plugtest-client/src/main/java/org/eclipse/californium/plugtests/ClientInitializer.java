@@ -152,7 +152,7 @@ public class ClientInitializer {
 		Arguments arguments = new Arguments(uri, id, secret, rpk, x509, ecdhe, ping, verbose, json, cbor, null, null, leftArgs);
 		CoapEndpoint coapEndpoint = createEndpoint(config, arguments, null, ephemeralPort);
 		coapEndpoint.start();
-		LOGGER.info("endpoint started at {}", coapEndpoint.getAddress());
+		LOGGER.trace("endpoint started at {}", coapEndpoint.getAddress());
 		EndpointManager.getEndpointManager().setDefaultEndpoint(coapEndpoint);
 
 		return arguments;

@@ -59,7 +59,7 @@ public class TcpAdaptionLayer extends AbstractLayer {
 	@Override
 	public void receiveEmptyMessage(Exchange exchange, EmptyMessage message) {
 		// Empty messages are ignored when running over TCP connector.
-		LOGGER.info("discarding empty message received in TCP mode: {}", message);
+		LOGGER.trace("discarding empty message received in TCP mode: {}", message);
 	}
 
 }

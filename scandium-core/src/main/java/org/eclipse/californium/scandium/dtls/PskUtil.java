@@ -90,11 +90,11 @@ public class PskUtil implements Destroyable {
 		ServerNames serverNames = session.getServerNames();
 		if (sniEnabled && serverNames != null) {
 			hostName = session.getHostName();
-			LOGGER.debug("client [{}] uses PSK identity [{}] for server [{}]", session.getPeer(), pskIdentity,
+			LOGGER.info("client [{}] uses PSK identity [{}] for server [{}]", session.getPeer(), pskIdentity,
 					hostName);
 			pskSecret = pskStore.getKey(serverNames, pskIdentity);
 		} else {
-			LOGGER.debug("client [{}] uses PSK identity [{}]", session.getPeer(), pskIdentity);
+			LOGGER.info("client [{}] uses PSK identity [{}]", session.getPeer(), pskIdentity);
 			pskSecret = pskStore.getKey(pskIdentity);
 		}
 		if (pskSecret == null) {

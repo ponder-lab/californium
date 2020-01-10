@@ -272,7 +272,7 @@ public class CoapServer implements ServerInterface {
 	public synchronized void stop() {
 
 		if (running) {
-			LOGGER.info("Stopping server");
+			LOGGER.trace("Stopping server");
 			for (Endpoint ep : endpoints) {
 				ep.stop();
 			}

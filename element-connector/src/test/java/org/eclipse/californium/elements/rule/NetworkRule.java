@@ -348,7 +348,7 @@ public class NetworkRule implements TestRule {
 	protected void initNetwork(boolean outerScope) {
 		if (Mode.DIRECT == usedMode) {
 			if (outerScope && !DirectDatagramSocketImpl.isEmpty()) {
-				LOGGER.info("Previous test didn't 'closeNetwork()'!");
+				LOGGER.debug("Previous test didn't 'closeNetwork()'!");
 				DirectDatagramSocketImpl.clearAll();
 			}
 			DirectDatagramSocketImpl.configure(formatter, delayInMillis);
@@ -367,7 +367,7 @@ public class NetworkRule implements TestRule {
 	protected void closeNetwork() {
 		if (Mode.DIRECT == usedMode) {
 			if (!DirectDatagramSocketImpl.isEmpty()) {
-				LOGGER.info("Test didn't close all DatagramSockets!");
+				LOGGER.trace("Test didn't close all DatagramSockets!");
 				DirectDatagramSocketImpl.clearAll();
 			}
 			DirectDatagramSocketImpl.configure(DEFAULT_FORMATTER, DEFAULT_DELAY_IN_MILLIS);

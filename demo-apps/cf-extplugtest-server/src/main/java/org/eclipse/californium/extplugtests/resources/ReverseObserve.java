@@ -151,8 +151,8 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 				@Override
 				public void run() {
 					if (overallNotifies.get() > 0) {
-						HEALTH_LOGGER.debug("{} observes, {} by peers", observesByToken.size(), observesByPeer.size());
-						HEALTH_LOGGER.debug("{} notifies overall, {} observes overall", overallNotifies.get(),
+						HEALTH_LOGGER.trace("{} observes, {} by peers", observesByToken.size(), observesByPeer.size());
+						HEALTH_LOGGER.trace("{} notifies overall, {} observes overall", overallNotifies.get(),
 								overallObserves.get());
 					}
 				}
@@ -210,11 +210,11 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 					overallObserves.incrementAndGet();
 				} else {
 					if (pendingObservation != null) {
-						LOGGER.info("Requested cancel observation {}", pendingObservation.getObservationToken());
+						LOGGER.trace("Requested cancel observation {}", pendingObservation.getObservationToken());
 						endpoint.cancelObservation(pendingObservation.getObservationToken());
 						exchange.respond(CHANGED);
 					} else {
-						LOGGER.info("Requested cancel not established observation for {}", key);
+						LOGGER.trace("Requested cancel not established observation for {}", key);
 						exchange.respond(CHANGED);
 					}
 				}
@@ -235,9 +235,9 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 		} else {
 			String peer = peersByToken.get(token);
 			if (peer != null) {
-				LOGGER.info("Notification {} from old observe: {}", response, peer);
+				LOGGER.trace("Notification {} from old observe: {}", response, peer);
 			} else {
-				LOGGER.info("Notification {} from unkown observe", response);
+				LOGGER.trace("Notification {} from unkown observe", response);
 			}
 		}
 	}
@@ -385,7 +385,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 		@Override
 		public void onResponse(final Response response) {
 			if (response.isError()) {
-				LOGGER.info("Observation response error: {}", response.getCode());
+				LOGGER.trace("Observation response error: {}", response.getCode());
 				remove(response.getCode());
 			} else if (response.isNotification()) {
 				if (registered.compareAndSet(false, true)) {
@@ -396,7 +396,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 							new ObservationRequest(incomingExchange, token));
 					if (previous != null && !previous.getObservationToken().equals(Token.EMPTY)
 							&& !token.equals(previous.getObservationToken())) {
-						LOGGER.info("Cancel previous observation {}", token);
+						LOGGER.trace("Cancel previous observation {}", token);
 						endpoint.cancelObservation(previous.getObservationToken());
 					}
 					peersByToken.put(token, key);
@@ -404,7 +404,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 					incomingExchange.respond(CONTENT, token.getBytes(), APPLICATION_OCTET_STREAM);
 				}
 			} else {
-				LOGGER.info("Observation {} not established!", outgoingObserveRequest.getToken());
+				LOGGER.trace("Observation {} not established!", outgoingObserveRequest.getToken());
 				remove(NOT_ACCEPTABLE);
 			}
 		}
@@ -421,7 +421,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 		@Override
 		protected void failed() {
 			if (!failureLogged) {
-				LOGGER.debug("Observe request failed! {}", outgoingObserveRequest.getToken());
+				LOGGER.trace("Observe request failed! {}", outgoingObserveRequest.getToken());
 			}
 			remove(INTERNAL_SERVER_ERROR);
 		}
@@ -429,7 +429,7 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 		private void remove(ResponseCode code) {
 			String key = incomingExchange.getPeerKey();
 			observesByPeer.remove(key);
-			LOGGER.info("Removed observation for {}", key);
+			LOGGER.trace("Removed observation for {}", key);
 			incomingExchange.respond(code);
 		}
 	}
@@ -496,11 +496,11 @@ public class ReverseObserve extends CoapResource implements NotificationListener
 
 		private void reregister() {
 			String key = incomingExchange.getPeerKey();
-			LOGGER.info("Cancel observation {} for {}", observationToken, key);
+			LOGGER.trace("Cancel observation {} for {}", observationToken, key);
 			incomingExchange.getEndpoint().cancelObservation(observationToken);
 			observesByPeer.remove(key);
 			observesByToken.remove(observationToken, this);
-			LOGGER.info("Restart observation for {}", key);
+			LOGGER.trace("Restart observation for {}", key);
 			processPOST(incomingExchange);
 		}
 	}

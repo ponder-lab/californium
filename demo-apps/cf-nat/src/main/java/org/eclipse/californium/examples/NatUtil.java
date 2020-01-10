@@ -446,10 +446,10 @@ public class NatUtil implements Runnable {
 		NatEntry entry = new NatEntry(incoming);
 		NatEntry old = nats.put(incoming, entry);
 		if (null != old) {
-			LOGGER.info("changed NAT for {} from {} to {}.", incoming, old.getPort(), entry.getPort());
+			LOGGER.trace("changed NAT for {} from {} to {}.", incoming, old.getPort(), entry.getPort());
 			old.stop();
 		} else {
-			LOGGER.info("add NAT for {} to {}.", incoming, entry.getPort());
+			LOGGER.trace("add NAT for {} to {}.", incoming, entry.getPort());
 		}
 		return entry.getPort();
 	}
@@ -551,12 +551,12 @@ public class NatUtil implements Runnable {
 			if (forward != null || backward != null) {
 				forward = null;
 				backward = null;
-				LOGGER.info("NAT stops message dropping.");
+				LOGGER.trace("NAT stops message dropping.");
 			}
 		} else {
 			forward = new MessageDropping("request", percent);
 			backward = new MessageDropping("responses", percent);
-			LOGGER.info("NAT message dropping {}%.", percent);
+			LOGGER.trace("NAT message dropping {}%.", percent);
 		}
 	}
 
@@ -573,11 +573,11 @@ public class NatUtil implements Runnable {
 		if (percent == 0) {
 			if (forward != null) {
 				forward = null;
-				LOGGER.info("NAT stops forward message dropping.");
+				LOGGER.trace("NAT stops forward message dropping.");
 			}
 		} else {
 			forward = new MessageDropping("request", percent);
-			LOGGER.info("NAT forward message dropping {}%.", percent);
+			LOGGER.trace("NAT forward message dropping {}%.", percent);
 		}
 	}
 
@@ -594,11 +594,11 @@ public class NatUtil implements Runnable {
 		if (percent == 0) {
 			if (backward != null) {
 				backward = null;
-				LOGGER.info("NAT stops backward message dropping.");
+				LOGGER.trace("NAT stops backward message dropping.");
 			}
 		} else {
 			backward = new MessageDropping("response", percent);
-			LOGGER.info("NAT backward message dropping {}%.", percent);
+			LOGGER.trace("NAT backward message dropping {}%.", percent);
 		}
 	}
 
@@ -620,11 +620,11 @@ public class NatUtil implements Runnable {
 		if (percent == 0) {
 			if (reorder != null) {
 				reorder = null;
-				LOGGER.info("NAT stops message reordering.");
+				LOGGER.trace("NAT stops message reordering.");
 			}
 		} else {
 			reorder = new MessageReordering("reordering", percent, delayMillis, randomDelayMillis);
-			LOGGER.info("NAT message reordering {}%.", percent);
+			LOGGER.trace("NAT message reordering {}%.", percent);
 		}
 	}
 

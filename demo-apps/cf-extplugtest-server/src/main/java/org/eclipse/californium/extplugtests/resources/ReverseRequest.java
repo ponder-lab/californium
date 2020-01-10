@@ -128,7 +128,7 @@ public class ReverseRequest extends CoapResource {
 				@Override
 				public void run() {
 					if (overallRequests.get() > 0) {
-						HEALTH_LOGGER.debug("{} reverse-requests, {} sent, {} pending", overallRequests.get(),
+						HEALTH_LOGGER.trace("{} reverse-requests, {} sent, {} pending", overallRequests.get(),
 								overallSentRequests.get(), overallPendingRequests.get());
 					}
 				}
@@ -183,10 +183,10 @@ public class ReverseRequest extends CoapResource {
 			long overall = overallRequests.addAndGet(numberOfRequests);
 			overallPendingRequests.addAndGet(numberOfRequests);
 			if (overallSentRequests.getAndIncrement() == 0) {
-				LOGGER.info("start reverse requests!");
+				LOGGER.trace("start reverse requests!");
 			}
-			LOGGER.debug("{}", request);
-			LOGGER.info("{}/{}: {} reverse requests, {} overall.", request.getSourceContext().getPeerAddress(),
+			LOGGER.trace("{}", request);
+			LOGGER.trace("{}/{}: {} reverse requests, {} overall.", request.getSourceContext().getPeerAddress(),
 					resource, numberOfRequests, overall);
 			Endpoint endpoint = exchange.advanced().getEndpoint();
 			exchange.respond(CHANGED);
@@ -224,7 +224,7 @@ public class ReverseRequest extends CoapResource {
 		public void onResponse(final Response response) {
 			job.cancel(false);
 			if (response.isError()) {
-				LOGGER.info("error: {}, pending: {}", response.getCode(), count);
+				LOGGER.trace("error: {}, pending: {}", response.getCode(), count);
 				subtractPending(count);
 			} else {
 				--count;
@@ -258,14 +258,14 @@ public class ReverseRequest extends CoapResource {
 		protected void failed() {
 			job.cancel(false);
 			if (!failureLogged) {
-				LOGGER.debug("reverse get request failed! MID {}, pending: {}", outgoingRequest.getMID(), count);
+				LOGGER.trace("reverse get request failed! MID {}, pending: {}", outgoingRequest.getMID(), count);
 			}
 			subtractPending(count);
 		}
 
 		private void subtractPending(int count) {
 			if (overallPendingRequests.addAndGet(-count) <= 0) {
-				LOGGER.info("sent all requests, ready!");
+				LOGGER.trace("sent all requests, ready!");
 			}
 		}
 

@@ -101,7 +101,7 @@ public class ExampleDTLSClient {
 		messageCounter.countDown();
 		long c = messageCounter.getCount();
 		if (LOG.isInfoEnabled()) {
-			LOG.info("Received response: {} {}", new Object[] { new String(raw.getBytes()), c });
+			LOG.trace("Received response: {} {}", new Object[] { new String(raw.getBytes()), c });
 		}
 		if (0 < c) {
 			clientMessageCounter.incrementAndGet();
@@ -109,7 +109,7 @@ public class ExampleDTLSClient {
 				RawData data = RawData.outbound((payload + c + ".").getBytes(), raw.getEndpointContext(), null, false);
 				dtlsConnector.send(data);
 			} catch (IllegalStateException e) {
-				LOG.debug("send failed after {} messages", (c - 1), e);
+				LOG.trace("send failed after {} messages", (c - 1), e);
 			}
 		} else {
 			dtlsConnector.destroy();

@@ -45,7 +45,7 @@ public class ExecutorsUtil {
 
 		@Override
 		public void run() {
-			LOGGER.trace("warmup ...");
+			LOGGER.info("warmup ...");
 		}
 	};
 
@@ -223,7 +223,7 @@ public class ExecutorsUtil {
 				long size = getQueue().size();
 				long diff = Math.abs(lastSize - size);
 				if (diff > QUEUE_SIZE_DIFF && scheduleQueueSize.compareAndSet(lastSize, size)) {
-					LOGGER.debug("Job queue {}", size);
+					LOGGER.trace("Job queue {}", size);
 				}
 				directExecutor.execute(command);
 			}

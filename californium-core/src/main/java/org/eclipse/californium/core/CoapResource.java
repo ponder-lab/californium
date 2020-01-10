@@ -767,7 +767,7 @@ public  class CoapResource implements Resource {
 	@Override
 	public void removeObserveRelation(ObserveRelation relation) {
 		if (observeRelations.remove(relation)) {
-			LOGGER.info("remove observe relation between {} and resource {} ({}, size {})", relation.getKey(), getURI(),
+			LOGGER.trace("remove observe relation between {} and resource {} ({}, size {})", relation.getKey(), getURI(),
 					relation.getExchange(), observeRelations.getSize());
 			for (ResourceObserver obs : observers) {
 				obs.removedObserveRelation(relation);

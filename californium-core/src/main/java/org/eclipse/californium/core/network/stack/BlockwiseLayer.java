@@ -828,24 +828,24 @@ public class BlockwiseLayer extends AbstractLayer {
 			// ongoing blockwise transfer
 			if (starting) {
 				if (status.isNew(response)) {
-					LOGGER.debug("discarding outdated block2 transfer {}, current is [{}]", status.getObserve(),
+					LOGGER.trace("discarding outdated block2 transfer {}, current is [{}]", status.getObserve(),
 							response);
 					clearBlock2Status(key, status);
 					status.completeOldTransfer(exchange);
 				} else {
-					LOGGER.debug("discarding old block2 transfer [{}], received during ongoing block2 transfer {}",
+					LOGGER.trace("discarding old block2 transfer [{}], received during ongoing block2 transfer {}",
 							response, status.getObserve());
 					status.completeNewTranfer(exchange);
 					return true;
 				}
 			} else if (!status.matchTransfer(exchange)) {
-				LOGGER.debug("discarding outdate block2 response [{}, {}] received during ongoing block2 transfer {}",
+				LOGGER.trace("discarding outdate block2 response [{}, {}] received during ongoing block2 transfer {}",
 						exchange.getNotificationNumber(), response, status.getObserve());
 				status.completeNewTranfer(exchange);
 				return true;
 			}
 		} else if (block != null && block.getNum() != 0) {
-			LOGGER.debug("discarding stale block2 response [{}, {}] received without ongoing block2 transfer for {}",
+			LOGGER.trace("discarding stale block2 response [{}, {}] received without ongoing block2 transfer for {}",
 					exchange.getNotificationNumber(), response, key);
 			exchange.setComplete();
 			return true;
@@ -1147,10 +1147,10 @@ public class BlockwiseLayer extends AbstractLayer {
 			newStatus = getOutboundBlock2Status(key, exchange, response);
 		}
 		if (previousStatus != null && !previousStatus.isComplete()) {
-			LOGGER.debug("stop previous block transfer {} {} for new {}", key, previousStatus, response);
+			LOGGER.trace("stop previous block transfer {} {} for new {}", key, previousStatus, response);
 			previousStatus.completeResponse();
 		} else {
-			LOGGER.debug("block transfer {} for {}", key, response);
+			LOGGER.trace("block transfer {} for {}", key, response);
 		}
 		return newStatus;
 	}

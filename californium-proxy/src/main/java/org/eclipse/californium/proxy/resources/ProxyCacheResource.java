@@ -236,7 +236,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 
 		// if the response is not null, manage the cached response
 		if (response != null) {
-			LOGGER.debug("Cache hit");
+			LOGGER.trace("Cache hit");
 
 			// check if the response is expired
 			long currentTime = ClockUtil.nanoRealtime();
@@ -248,12 +248,12 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 				// set the current time as the response timestamp
 				response.setNanoTimestamp(currentTime);
 			} else {
-				LOGGER.debug("Expired response");
+				LOGGER.trace("Expired response");
 
 				// try to validate the response
 				response = validate(cacheKey);
 				if (response != null) {
-					LOGGER.debug("Validation successful");
+					LOGGER.trace("Validation successful");
 				} else {
 					invalidateRequest(cacheKey);
 				}
@@ -266,7 +266,7 @@ public class ProxyCacheResource extends CoapResource implements CacheResource {
 	@Override
 	public void invalidateRequest(Request request) {
 		invalidateRequest(CacheKey.fromAcceptOptions(request));
-		LOGGER.debug("Invalidated request");
+		LOGGER.trace("Invalidated request");
 	}
 
 	@Override

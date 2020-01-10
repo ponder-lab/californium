@@ -63,7 +63,7 @@ public class RequestDecryptor extends Decryptor {
 	 */
 	public static Request decrypt(OSCoreCtxDB db, Request request) throws CoapOSException {
 		
-		LOGGER.info("Removes E options from outer options which are not allowed there");
+		LOGGER.debug("Removes E options from outer options which are not allowed there");
 		discardEOptions(request);
 
 		byte[] protectedData = request.getPayload();

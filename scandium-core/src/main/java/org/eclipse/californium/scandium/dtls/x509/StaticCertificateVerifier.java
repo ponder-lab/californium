@@ -81,7 +81,7 @@ public class StaticCertificateVerifier implements CertificateVerifier {
 
 		} catch (GeneralSecurityException e) {
 			if (LOGGER.isTraceEnabled()) {
-				LOGGER.trace("Certificate validation failed", e);
+				LOGGER.debug("Certificate validation failed", e);
 			} else if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Certificate validation failed due to {}", e.getMessage());
 			}

@@ -58,7 +58,7 @@ public class ResponseDecryptor extends Decryptor {
 	 */
 	public static Response decrypt(OSCoreCtxDB db, Response response) throws OSException {
 
-		LOGGER.info("Removes E options from outer options which are not allowed there");
+		LOGGER.debug("Removes E options from outer options which are not allowed there");
 		discardEOptions(response);
 
 		byte[] protectedData = response.getPayload();
